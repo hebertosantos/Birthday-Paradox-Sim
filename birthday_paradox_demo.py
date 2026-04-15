@@ -198,8 +198,8 @@ def main() -> None:
 
     with st.sidebar:
         st.header("Controls")
-        n_people = st.slider("Number of people", min_value=2, max_value=100, value=23, step=1)
-        n_runs = st.slider("Number of simulation runs", min_value=1, max_value=1000, value=25, step=1)
+        n_people = int(st.number_input("Number of people", min_value=2, max_value=100, value=23, step=1))
+        n_runs = int(st.number_input("Number of simulation runs", min_value=1, max_value=1000, value=25, step=1))
         days_in_year = st.radio("Days in the year", options=[365, 366], horizontal=True)
         slow_mode = st.toggle("Slow mode", value=True, help="Adds a 1-second pause between iterations.")
         run_clicked = st.button("Run simulation", type="primary", use_container_width=True)
@@ -276,6 +276,7 @@ def main() -> None:
     fig, ax = plt.subplots(figsize=(10, 4.5))
     ax.plot(range(1, n_runs + 1), estimate_history, label="Monte Carlo estimate")
     ax.axhline(exact_prob, linestyle="--", label="Exact probability")
+    ax.set_ylim(0, 1)
     ax.set_xlabel("Iteration")
     ax.set_ylabel("Probability")
     ax.set_title("Convergence of the Monte Carlo estimate")
